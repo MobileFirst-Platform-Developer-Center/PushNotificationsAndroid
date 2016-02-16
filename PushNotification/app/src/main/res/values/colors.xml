@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4B6BAF</color>
+    <color name="colorPrimaryDark">#3c558c</color>
+    <color name="colorAccent">#7F1C7D</color>
+
+    <!-- Button background color states -->
+    <color name="colorAccentShade3">#984997</color>
+    <color name="colorAccentShade2">#a560a4</color>
+    <color name="colorAccentShade1">#b276b1</color>
+
+    <!-- Text color states-->
+    <color name="colorTextShade3">#cccccc</color>
+    <color name="colorTextShade2">#b2b2b2</color>
+    <color name="colorTextShade1">#999999</color>
+</resources>

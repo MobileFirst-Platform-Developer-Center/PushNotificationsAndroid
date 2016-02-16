@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PushNotification</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_push">Hello Push!</string>
+    <string name="btn_is_push_supported">Is Push Supported</string>
+    <string name="btn_register_device">Register Device</string>
+    <string name="btn_get_tags">Get Tags</string>
+    <string name="btn_subscribe">Subscribe</string>
+    <string name="btn_get_subscriptions">Get Subscriptions</string>
+    <string name="btn_unsubscribe">Unsubscribe</string>
+    <string name="btn_unregister_device">Unregister Device</string>
+</resources>
