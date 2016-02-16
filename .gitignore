@@ -33,3 +33,6 @@ captures/
 
 # Mac File system
 .DS_Store
+
+## Directory-based project format:
+.idea/
