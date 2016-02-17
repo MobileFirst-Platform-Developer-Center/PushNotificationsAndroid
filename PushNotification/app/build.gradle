@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 
 repositories {
-    jcenter()
+    //jcenter()
+    maven {
+        url "http://visustar.francelab.fr.ibm.com:8081/nexus/content/repositories/mobile-s/"
+    }
 }
 
 android {
