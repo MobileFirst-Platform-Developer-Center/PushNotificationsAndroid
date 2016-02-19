@@ -12,6 +12,10 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notificatio
 2. In the MobileFirst console, under **Applications** → **PushNotificationsAndroid** → **Security** → **Map scope elements to security checks.**, add a mapping for `push.mobileclient`.
 3. Import the project to Android Studio, and run the sample by clicking the **Run* button.
 
+Notes:
+
+* The GCM Key and senderId must be configured via the MobileFirst Operations Console.
+
 ### Supported Levels
 IBM MobileFirst Platform Foundation 8.0
 
