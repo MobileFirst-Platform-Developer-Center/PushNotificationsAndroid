@@ -162,6 +162,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Error: " + e.getErrorMessage());
+                        Log.d(TAG, "Error: " + e + " Doc URL: " + e.getDocUrl() + " Error code: " + e.getErrorCode());
                     }
                 });
                 break;
@@ -286,6 +287,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         Log.i("Push Notifications", mfpSimplePushNotification.getAlert());
 
         // Show the received notification in an AlertDialog
-        showAlertMsg("Push Notifications", "alert: " + mfpSimplePushNotification.getAlert() + ", id: " + mfpSimplePushNotification.getId() + ", payload: " + mfpSimplePushNotification.getPayload());
+        showAlertMsg("Push Notifications", "alert: " + mfpSimplePushNotification.getAlert() +
+                ", id: " + mfpSimplePushNotification.getId() +
+                ", payload: " + mfpSimplePushNotification.getPayload() +
+                "  As string: " + mfpSimplePushNotification.toString());
     }
 }
