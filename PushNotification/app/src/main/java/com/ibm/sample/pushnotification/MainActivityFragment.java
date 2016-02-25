@@ -126,9 +126,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         int id = v.getId();
 
-        String[] tags = new String[2];
-        tags[0] = "tag_test1";
-        tags[1] = "tag_test2";
+        String[] tags = {"Tag 1", "Tag 2"};
 
         switch (id) {
             case R.id.btn_push_supported:
