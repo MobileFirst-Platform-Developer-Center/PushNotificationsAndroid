@@ -31,8 +31,8 @@ public class PushNotificationApplication extends Application {
 
         // Initialize MobileFirst Push
         // Initialization in the application class, allows you to obtain an instance of MFPPush from any class without reinitializing it.
-        MFPPush push = MFPPush.getInstance();
-        push.initialize(this);
+        MFPPush.getInstance().initialize(this);
+
         Log.i(TAG, "Push has been initialized in the PushNotificationApplication.class.");
 
     }
