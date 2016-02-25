@@ -1,12 +1,12 @@
 /**
  * Copyright 2015 IBM Corp.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -284,10 +284,11 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public void onReceive(MFPSimplePushNotification mfpSimplePushNotification) {
         Log.i("Push Notifications", mfpSimplePushNotification.getAlert());
 
+        String alert = "Alert: " + mfpSimplePushNotification.getAlert();
+        String alertID = "ID: " + mfpSimplePushNotification.getId();
+        String alertPayload = "Payload: " + mfpSimplePushNotification.getPayload();
+
         // Show the received notification in an AlertDialog
-        showAlertMsg("Push Notifications", "alert: " + mfpSimplePushNotification.getAlert() +
-                ", id: " + mfpSimplePushNotification.getId() +
-                ", payload: " + mfpSimplePushNotification.getPayload() +
-                "  As string: " + mfpSimplePushNotification.toString());
+        showAlertMsg("Push Notifications", alert + "\n" + alertID + "\n" + alertPayload);
     }
 }
