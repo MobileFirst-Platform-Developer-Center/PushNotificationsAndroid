@@ -1,5 +1,5 @@
 <component name="CopyrightManager">
-  <settings default="IBM">
+  <settings default="">
     <module2copyright>
       <element module="All" copyright="IBM" />
     </module2copyright>
