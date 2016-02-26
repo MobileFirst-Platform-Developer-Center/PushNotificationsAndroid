@@ -34,5 +34,9 @@ captures/
 # Mac File system
 .DS_Store
 
-## Directory-based project format:
+# Directory-based project format:
 .idea/
+
+# License check script files
+pom-license.xml
+target/
