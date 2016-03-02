@@ -9,7 +9,8 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notificatio
 ### Usage
 
 1. From a command-line window, navigate to the project's root folder and run the command: `mfpdev app register`.
-2. In the MobileFirst console, under **Applications** → **PushNotificationsAndroid** → **Security** → **Map scope elements to security checks.**, add a mapping for `push.mobileclient`.
+2. In the MobileFirst console, under **Applications** → **PushNotificationsAndroid** → **Security** → **Map scope elements to security checks**, add a mapping for `push.mobileclient`.
+4. Via the MobileFirst Operations Console, setup the MobileFirst Server with either GCM details, and add tags.
 3. Import the project to Android Studio, and run the sample by clicking the **Run* button.
 
 Notes:
