@@ -81,8 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/btn_margin"
             android:background="@drawable/buttons_background"
-            android:padding="@dimen/btn_padding"
             android:enabled="false"
+            android:padding="@dimen/btn_padding"
             android:text="@string/btn_get_subscriptions"
             android:textColor="@android:color/white" />
 
@@ -91,8 +91,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/btn_margin"
-            android:enabled="false"
             android:background="@drawable/buttons_background"
+            android:enabled="false"
             android:padding="@dimen/btn_padding"
             android:text="@string/btn_unsubscribe"
             android:textColor="@android:color/white" />
