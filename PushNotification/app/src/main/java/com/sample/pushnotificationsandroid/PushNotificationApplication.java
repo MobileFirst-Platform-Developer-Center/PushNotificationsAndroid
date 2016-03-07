@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ibm.sample.pushnotification;
+package com.sample.pushnotificationsandroid;
 
 import android.app.Application;
 import android.util.Log;

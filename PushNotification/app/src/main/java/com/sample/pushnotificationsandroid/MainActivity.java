@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.ibm.sample.pushnotification;
+package com.sample.pushnotificationsandroid;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.ibm.sample.pushnotificationsandroid.R;
 
 public class MainActivity extends AppCompatActivity {
 
