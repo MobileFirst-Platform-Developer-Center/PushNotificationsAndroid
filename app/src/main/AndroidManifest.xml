@@ -16,7 +16,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ibm.sample.pushnotificationsandroid">
+    package="com.sample.pushnotificationsandroid">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,7 +26,7 @@
     <!-- GCM Permissions -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <permission
-        android:name="com.ibm.sample.pushnotificationsandroid.permission.C2D_MESSAGE"
+        android:name="com.sample.pushnotificationsandroid.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <application
@@ -46,7 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.ibm.sample.pushnotification.IBMPushNotification" />
+                <action android:name="com.sample.pushnotificationsandroid.IBMPushNotification" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -63,7 +63,7 @@
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.ibm.sample.pushnotification" />
+                <category android:name="com.sample.pushnotificationsandroid" />
             </intent-filter>
         </receiver>
 
