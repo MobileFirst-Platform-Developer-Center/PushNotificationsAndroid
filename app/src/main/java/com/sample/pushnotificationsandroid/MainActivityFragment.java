@@ -33,7 +33,6 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
-import com.ibm.sample.pushnotificationsandroid.R;
 
 import java.util.List;
 
