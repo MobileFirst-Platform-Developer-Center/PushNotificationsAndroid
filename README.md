@@ -13,9 +13,23 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notificatio
 4. Via the MobileFirst Operations Console, setup the MobileFirst Server with the GCM details, and add tags.
 3. Import the project to Android Studio, and run the sample by clicking the **Run* button.
 
-Notes:
+1. Import the project to Android Studio.
+3. From a **Command-line** window, navigate to the project's root folder and run the command: `mfpdev app register`.
+4. Perform the required scope mapping for **push.mobileclient**.
+4. Run the app by clicking the **Run** button.
 
-* The GCM Key and senderId must be configured via the MobileFirst Operations Console.
+**[Sending a notification](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notifications/sending-push-notifications):**
+
+* Tag notification
+    * Use the **MobileFirst Operations Console → [your application] → Push → Send Push tab**.
+* Authenticated notification:
+    * Deploy the [**UserLogin** sample Security Check](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/authentication-and-security/user-authentication/security-check).
+    * In **MobileFirst Operations Console → [your application] → Security tab**, map the **push.mobileclient** scope to the **UserLogin** Security Check.
+    * Follow the instructions for [REST APIs](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notifications/sending-push-notifications#rest-apis) to send the notification.
+
+**Notes:**
+
+* The GCM Server Key and senderId values must be configured via the MobileFirst Operations Console.
 
 ### Supported Levels
 IBM MobileFirst Platform Foundation 8.0
