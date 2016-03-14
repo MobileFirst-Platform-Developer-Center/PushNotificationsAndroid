@@ -46,6 +46,8 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private Button unsubscribeBtn;
     private Button unregisterBtn;
 
+    private String[] tags;
+
     private MFPPush push = null;
 
     public MainActivityFragment() {
@@ -126,8 +128,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         int id = v.getId();
 
-        String[] tags = {"Tag 1", "Tag 2"};
-
         switch (id) {
             case R.id.btn_push_supported:
                 if (push.isPushSupported()) {
@@ -154,7 +154,19 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 push.getTags(new MFPPushResponseListener<List<String>>() {
                     @Override
                     public void onSuccess(List<String> strings) {
-                        showAlertMsg("Push Notifications", strings.toString());
+
+                        if (strings.isEmpty()) {
+                            tags = new String[0];
+                            showAlertMsg("Tags", "There are no available tags");
+                        } else {
+                            tags = new String[strings.size()];
+
+                            for (int i = 0; i < strings.size(); i++) {
+                                tags[i] = strings.get(i);
+                            }
+
+                            showAlertMsg("Tags", strings.toString());
+                        }
                     }
 
                     @Override
@@ -165,22 +177,31 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 });
                 break;
             case R.id.btn_subscribe:
-                push.subscribe(tags, new MFPPushResponseListener<String[]>() {
-                    @Override
-                    public void onSuccess(String[] strings) {
-                        showSnackbar("Subscribed successfully");
-                    }
+                if (tags != null && tags.length > 1) {
+                    push.subscribe(tags, new MFPPushResponseListener<String[]>() {
+                        @Override
+                        public void onSuccess(String[] strings) {
+                            showSnackbar("Subscribed successfully");
+                        }
 
-                    @Override
-                    public void onFailure(MFPPushException e) {
-                        showSnackbar("Failed to subscribe");
-                    }
-                });
+                        @Override
+                        public void onFailure(MFPPushException e) {
+                            showSnackbar("Failed to subscribe");
+                        }
+                    });
+                } else {
+                    showAlertMsg("Push Notifications", "There are no tags to subscribe to \n\n Try clicking on the \"Get Tags\" button");
+                }
                 break;
             case R.id.btn_get_subscriptions:
                 push.getSubscriptions(new MFPPushResponseListener<List<String>>() {
                     @Override
                     public void onSuccess(List<String> strings) {
+                        tags = new String[strings.size()];
+
+                        for (int i = 0; i < strings.size(); i++) {
+                            tags[i] = strings.get(i);
+                        }
                         showAlertMsg("Push Notification", strings.toString());
                     }
 
@@ -194,6 +215,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 push.unsubscribe(tags, new MFPPushResponseListener<String[]>() {
                     @Override
                     public void onSuccess(String[] strings) {
+                        updateTags(null);
                         showSnackbar("Unsubscribed successfully");
                     }
 
@@ -251,6 +273,18 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private void showSnackbar(String message) {
         //noinspection ConstantConditions
         Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    private void updateTags(List<String> strings) {
+        if (strings != null && strings.size() > 0) {
+            tags = new String[strings.size()];
+
+            for (int i = 0; i < strings.size(); i++) {
+                tags[i] = strings.get(i);
+            }
+        } else {
+            tags = new String[0];
+        }
     }
 
     public void showAlertMsg(final String title, final String msg) {
