@@ -56,7 +56,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // MFPPush is initialized in PushNotificationApplication.class
+        // MFPPush is initialized in PushNotificationsApplication.class
         push = MFPPush.getInstance();
 
 

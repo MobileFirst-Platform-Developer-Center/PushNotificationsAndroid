@@ -21,7 +21,7 @@ import android.util.Log;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush;
 
-public class PushNotificationApplication extends Application {
+public class PushNotificationsApplication extends Application {
 
     private static final String TAG = "Application";
 
@@ -33,7 +33,7 @@ public class PushNotificationApplication extends Application {
         // Initialization in the application class, allows you to obtain an instance of MFPPush from any class without reinitializing it.
         MFPPush.getInstance().initialize(this);
 
-        Log.i(TAG, "Push has been initialized in the PushNotificationApplication.class.");
+        Log.i(TAG, "Push has been initialized in the PushNotificationsApplication.class.");
 
     }
 }
