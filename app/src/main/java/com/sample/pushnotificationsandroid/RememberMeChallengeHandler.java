@@ -22,6 +22,9 @@ import org.json.JSONObject;
 
 public class RememberMeChallengeHandler extends WLChallengeHandler {
 
+    private Boolean isChallenged;
+
+
     public RememberMeChallengeHandler(String securityCheck) {
         super(securityCheck);
     }
