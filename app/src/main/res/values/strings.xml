@@ -26,4 +26,8 @@
     <string name="btn_get_subscriptions">Get Subscriptions</string>
     <string name="btn_unsubscribe">Unsubscribe</string>
     <string name="btn_unregister_device">Unregister Device</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
 </resources>
