@@ -20,6 +20,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush;
+import com.worklight.wlclient.api.WLClient;
 
 public class PushNotificationsApplication extends Application {
 
@@ -29,8 +30,10 @@ public class PushNotificationsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Initialize MobileFirst Push
-        // Initialization in the application class, allows you to obtain an instance of MFPPush from any class without reinitializing it.
+        // Initialize the MobileFirst SDK. This needs to happen just once.
+        WLClient.createInstance(this);
+
+        // Initialize MobileFirst Push SDK. This needs to happen just once.
         MFPPush.getInstance().initialize(this);
 
         // Initialize challenge handler

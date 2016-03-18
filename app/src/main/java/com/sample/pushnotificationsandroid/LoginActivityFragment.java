@@ -17,7 +17,6 @@
 package com.sample.pushnotificationsandroid;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,7 +53,7 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         remainingAttempts = 3;
 
@@ -65,7 +64,7 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
         super.onResume();
 
         if (remainingAttempts != null) {
-            remainingAttemptsTV.setText(remainingAttempts);
+            remainingAttemptsTV.setText(String.valueOf(remainingAttempts));
         }
 
         if (error != null) {
@@ -73,9 +72,8 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         userNameET = (EditText) view.findViewById(R.id.et_username);

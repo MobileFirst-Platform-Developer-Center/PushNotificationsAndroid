@@ -17,11 +17,16 @@
 package com.sample.pushnotificationsandroid;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +44,10 @@ import java.util.List;
 public class MainActivityFragment extends Fragment implements View.OnClickListener, MFPPushNotificationListener {
 
     private static final String TAG = "MainActivityFragment";
+
+    private BroadcastReceiver loginSuccessReceiver, loginRequiredReceiver;
+
+    private Context _this;
 
     // Button references to enable/disable
     private Button subscribeBtn;
@@ -58,6 +67,8 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        _this = getActivity();
+
         // MFPPush is initialized in PushNotificationsApplication.class
         push = MFPPush.getInstance();
 
@@ -75,6 +86,31 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         });
 */
 
+        // Handle challenge broadcast
+        loginRequiredReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                // Open login screen
+                Intent loginIntent = new Intent(_this, LoginActivity.class);
+                _this.startActivity(loginIntent);
+            }
+        };
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(_this).registerReceiver(loginSuccessReceiver, new IntentFilter(Constants.ACTION_LOGIN_SUCCESS));
+        LocalBroadcastManager.getInstance(_this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_REQUIRED));
+        LocalBroadcastManager.getInstance(_this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_FAILURE));
+    }
+
+    @Override
+    public void onStop() {
+        LocalBroadcastManager.getInstance(_this).unregisterReceiver(loginSuccessReceiver);
+        LocalBroadcastManager.getInstance(_this).unregisterReceiver(loginRequiredReceiver);
+        super.onStop();
     }
 
     @Override
@@ -298,7 +334,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             @Override
             public void run() {
                 // Create an AlertDialog Builder, and configure alert
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(_this);
                 builder.setTitle(title)
                         .setMessage(msg)
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
