@@ -19,11 +19,14 @@ package com.sample.pushnotificationsandroid;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Project: PushNotificationsAndroid
@@ -35,6 +38,17 @@ import android.widget.Button;
 
 public class LoginActivityFragment extends Fragment implements OnClickListener {
 
+    private static final String TAG = "LoginActivityFragment";
+
+    private EditText userNameET;
+    private EditText passwordET;
+    private TextView errorLabelTV;
+    private TextView remainingAttemptsTV;
+
+    private String error;
+    private Integer remainingAttempts;
+
+
     public LoginActivityFragment() {
         // Mandatory empty constructor
     }
@@ -42,7 +56,21 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        remainingAttempts = 3;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (remainingAttempts != null) {
+            remainingAttemptsTV.setText(remainingAttempts);
+        }
+
+        if (error != null) {
+            errorLabelTV.setText(error);
+        }
     }
 
     @Nullable
@@ -50,6 +78,10 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        userNameET = (EditText) view.findViewById(R.id.et_username);
+        passwordET = (EditText) view.findViewById(R.id.et_password);
+        errorLabelTV = (TextView) view.findViewById(R.id.tv_error_message);
+        remainingAttemptsTV = (TextView) view.findViewById(R.id.tv_remaining_attempts);
 
         Button cancelBtn = (Button) view.findViewById(R.id.btn_cancel);
         cancelBtn.setOnClickListener(this);
@@ -63,5 +95,15 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()) {
+            case R.id.btn_login:
+                //TODO: setup login
+                break;
+            case R.id.btn_cancel:
+                // TODO: setup cancel
+                break;
+            default:
+                Log.d(TAG, "OnClick not handled");
+        }
     }
 }

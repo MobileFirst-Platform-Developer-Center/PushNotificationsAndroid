@@ -87,4 +87,11 @@
         android:layout_toRightOf="@id/tv_remaining_attempts_label"
         android:text="@string/default_remaining_attempts" />
 
+    <TextView
+        android:id="@+id/tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_remaining_attempts_label"
+        android:layout_marginTop="7dp" />
+
 </RelativeLayout>
