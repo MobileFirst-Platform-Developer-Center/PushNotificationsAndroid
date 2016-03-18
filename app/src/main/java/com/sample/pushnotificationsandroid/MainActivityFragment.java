@@ -86,6 +86,17 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         });
 */
 
+        //Handle auto-login success
+        loginSuccessReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //Go back to main area
+                Intent relaunchMain = new Intent(_this, MainActivity.class);
+                getActivity().finish();
+                _this.startActivity(relaunchMain);
+            }
+        };
+
         // Handle challenge broadcast
         loginRequiredReceiver = new BroadcastReceiver() {
             @Override
