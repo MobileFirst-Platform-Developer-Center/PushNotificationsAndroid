@@ -33,6 +33,9 @@ public class PushNotificationsApplication extends Application {
         // Initialization in the application class, allows you to obtain an instance of MFPPush from any class without reinitializing it.
         MFPPush.getInstance().initialize(this);
 
+        // Initialize challenge handler
+        RememberMeChallengeHandler.createAndRegister();
+
         Log.i(TAG, "Push has been initialized in the PushNotificationsApplication.class.");
 
     }

@@ -96,9 +96,17 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
 
         switch (v.getId()) {
+            // Login button pressed
             case R.id.btn_login:
-                //TODO: setup login
+                String username = String.valueOf(userNameET.getText());
+                String password = String.valueOf(passwordET.getText());
+
+                if (!username.equals("") && !password.equals("")) {
+                    //TODO: send challenge
+                }
                 break;
+
+            // Cancel button pressed
             case R.id.btn_cancel:
                 // TODO: setup cancel
                 break;
