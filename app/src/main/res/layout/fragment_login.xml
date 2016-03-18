@@ -53,36 +53,35 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_cancel"
-        style="?android:borderlessButtonStyle"
+    <CheckBox
+        android:id="@+id/remember_me_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_password"
-        android:text="@string/btn_cancel" />
+        android:text="@string/remember_me_label" />
 
     <Button
         android:id="@+id/btn_login"
         style="?android:borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/til_password"
-        android:layout_toEndOf="@id/btn_cancel"
-        android:layout_toRightOf="@id/btn_cancel"
+        android:layout_below="@id/remember_me_cb"
+        android:layout_toEndOf="@id/btn_login"
+        android:layout_toRightOf="@id/btn_login"
         android:text="@string/btn_login" />
 
     <TextView
         android:id="@+id/tv_remaining_attempts_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_cancel"
+        android:layout_below="@id/btn_login"
         android:text="@string/label_remaining_attempts" />
 
     <TextView
         android:id="@+id/tv_remaining_attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_cancel"
+        android:layout_below="@id/btn_login"
         android:layout_toEndOf="@id/tv_remaining_attempts_label"
         android:layout_toRightOf="@id/tv_remaining_attempts_label"
         android:text="@string/default_remaining_attempts" />
