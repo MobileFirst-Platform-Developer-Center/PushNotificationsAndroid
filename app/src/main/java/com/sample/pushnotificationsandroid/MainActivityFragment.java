@@ -147,6 +147,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Failed to register device");
+                        Log.d(TAG, "Failed to register device with error: " + e.toString());
                     }
                 });
                 break;
@@ -187,6 +188,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                         @Override
                         public void onFailure(MFPPushException e) {
                             showSnackbar("Failed to subscribe");
+                            Log.d(TAG, "Failed to subscribe with error: " + e.toString());
                         }
                     });
                 } else {
@@ -208,6 +210,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onFailure(MFPPushException e) {
                         showAlertMsg("Push Notification", e.getErrorMessage());
+                        Log.d(TAG, "Failed to subscribe with error: " + e.toString());
                     }
                 });
                 break;
@@ -222,6 +225,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Failed to unsubscribe");
+                        Log.d(TAG, "Failed to unsubscribe with error: " + e.toString());
                     }
                 });
                 break;
@@ -236,6 +240,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Failed to unregister");
+                        Log.d(TAG, "Failed to unregister device with error: " + e.toString());
                     }
                 });
                 break;

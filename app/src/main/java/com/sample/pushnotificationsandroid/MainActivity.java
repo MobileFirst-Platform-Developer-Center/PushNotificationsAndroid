@@ -16,11 +16,18 @@
 
 package com.sample.pushnotificationsandroid;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.worklight.wlclient.api.WLClient;
+
 public class MainActivity extends AppCompatActivity {
+
+    private BroadcastReceiver loginSuccessReceiver, loginRequiredReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +35,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Initialize the MobileFirst SDK. This needs to happen just once.
+        WLClient.createInstance(this);
+
+        // Initialize the challenge handler is handled in PushNotificationsApplication
+        // RememberMeChallengeHandler.createAndRegister();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver(loginSuccessReceiver, new IntentFilter(Constants.ACTION_LOGIN_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_REQUIRED));
+        LocalBroadcastManager.getInstance(this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_FAILURE));
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(loginSuccessReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(loginRequiredReceiver);
+        super.onStop();
     }
 }
