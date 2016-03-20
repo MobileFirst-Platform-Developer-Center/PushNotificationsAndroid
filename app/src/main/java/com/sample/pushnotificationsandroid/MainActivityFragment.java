@@ -243,7 +243,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 });
                 break;
             case R.id.btn_subscribe:
-                if (tags != null && tags.length > 1) {
+                if (tags != null && tags.length > 0) {
                     push.subscribe(tags, new MFPPushResponseListener<String[]>() {
                         @Override
                         public void onSuccess(String[] strings) {
