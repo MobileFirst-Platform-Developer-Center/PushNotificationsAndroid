@@ -16,25 +16,17 @@
 
 package com.sample.pushnotificationsandroid;
 
-/**
- * Project: PushNotificationsAndroid
- * Created by: Eric N Garcia on 3/18/16.
- * IBM
- * Software Engineer
- * Mobile First Platform Foundation CORD
- */
-
 public class Constants {
-    static final String ACTION_LOGIN = "com.sample.userauthandroid.broadcast.login";
-    static final String ACTION_LOGIN_AUTO = "com.sample.userauthandroid.broadcast.login.auto";
-    static final String ACTION_LOGIN_SUCCESS = "com.sample.userauthandroid.broadcast.login.success";
-    static final String ACTION_LOGIN_FAILURE = "com.sample.userauthandroid.broadcast.login.failure";
-    static final String ACTION_LOGIN_REQUIRED = "com.sample.userauthandroid.broadcast.login.required";
+    static final String ACTION_LOGIN = "com.sample.pushnotificationsandroid.broadcast.login";
+    static final String ACTION_LOGIN_AUTO = "com.sample.pushnotificationsandroid.broadcast.login.auto";
+    static final String ACTION_LOGIN_SUCCESS = "com.sample.pushnotificationsandroid.broadcast.login.success";
+    static final String ACTION_LOGIN_FAILURE = "com.sample.pushnotificationsandroid.broadcast.login.failure";
+    static final String ACTION_LOGIN_REQUIRED = "com.sample.pushnotificationsandroid.broadcast.login.required";
 
-    static final String ACTION_LOGOUT = "com.sample.userauthandroid.broadcast.logout";
-    static final String ACTION_LOGOUT_SUCCESS = "com.sample.userauthandroid.broadcast.logout.success";
-    static final String ACTION_LOGOUT_FAILURE = "com.sample.userauthandroid.broadcast.logout.failure";
+    static final String ACTION_LOGOUT = "com.sample.pushnotificationsandroid.broadcast.logout";
+    static final String ACTION_LOGOUT_SUCCESS = "com.sample.pushnotificationsandroid.broadcast.logout.success";
+    static final String ACTION_LOGOUT_FAILURE = "com.sample.pushnotificationsandroid.broadcast.logout.failure";
 
-    static final String PREFERENCES_FILE = "com.sample.userauthandroid.preferences";
-    static final String PREFERENCES_KEY_USER = "com.sample.userauthandroid.preferences.user";
+    static final String PREFERENCES_FILE = "com.sample.pushnotificationsandroid.preferences";
+    static final String PREFERENCES_KEY_USER = "com.sample.pushnotificationsandroid.preferences.user";
 }

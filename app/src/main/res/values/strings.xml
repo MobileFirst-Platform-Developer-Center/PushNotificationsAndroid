@@ -30,7 +30,6 @@
     <string name="btn_login">Login</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
-    <string name="label_remaining_attempts">Remaining Attempts:</string>
-    <string name="default_remaining_attempts">3</string>
+    <string name="label_remaining_attempts">Remaining Attempts: </string>
     <string name="remember_me_label">Remember Me</string>
 </resources>

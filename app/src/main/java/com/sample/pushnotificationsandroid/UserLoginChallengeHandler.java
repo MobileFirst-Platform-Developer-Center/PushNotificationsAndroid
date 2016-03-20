@@ -24,19 +24,17 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.worklight.wlclient.api.WLAccessTokenListener;
 import com.worklight.wlclient.api.WLAuthorizationManager;
 import com.worklight.wlclient.api.WLClient;
 import com.worklight.wlclient.api.WLFailResponse;
 import com.worklight.wlclient.api.WLLoginResponseListener;
 import com.worklight.wlclient.api.WLLogoutResponseListener;
 import com.worklight.wlclient.api.challengehandler.WLChallengeHandler;
-import com.worklight.wlclient.auth.AccessToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RememberMeChallengeHandler extends WLChallengeHandler {
+public class UserLoginChallengeHandler extends WLChallengeHandler {
 
     private static String securityCheckName = "UserLogin";
     private int remainingAttempts = -1;
@@ -46,7 +44,7 @@ public class RememberMeChallengeHandler extends WLChallengeHandler {
 
     private LocalBroadcastManager broadcastManager;
 
-    public RememberMeChallengeHandler() {
+    public UserLoginChallengeHandler() {
         super(securityCheckName);
         context = WLClient.getInstance().getContext();
         broadcastManager = LocalBroadcastManager.getInstance(context);
@@ -56,14 +54,6 @@ public class RememberMeChallengeHandler extends WLChallengeHandler {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(Constants.PREFERENCES_KEY_USER);
         editor.apply();
-
-        //Receive auto-login requests
-        broadcastManager.registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                autoLogin();
-            }
-        }, new IntentFilter(Constants.ACTION_LOGIN_AUTO));
 
         //Receive login requests
         broadcastManager.registerReceiver(new BroadcastReceiver() {
@@ -88,8 +78,8 @@ public class RememberMeChallengeHandler extends WLChallengeHandler {
 
     }
 
-    public static RememberMeChallengeHandler createAndRegister() {
-        RememberMeChallengeHandler challengeHandler = new RememberMeChallengeHandler();
+    public static UserLoginChallengeHandler createAndRegister() {
+        UserLoginChallengeHandler challengeHandler = new UserLoginChallengeHandler();
         WLClient.getInstance().registerChallengeHandler(challengeHandler);
         return challengeHandler;
     }
@@ -175,20 +165,6 @@ public class RememberMeChallengeHandler extends WLChallengeHandler {
                 }
             });
         }
-    }
-
-    public void autoLogin() {
-        WLAuthorizationManager.getInstance().obtainAccessToken(securityCheckName, new WLAccessTokenListener() {
-            @Override
-            public void onSuccess(AccessToken accessToken) {
-                Log.d(securityCheckName, "auto login success");
-            }
-
-            @Override
-            public void onFailure(WLFailResponse wlFailResponse) {
-                Log.d(securityCheckName, "auto login failure");
-            }
-        });
     }
 
     public void logout() {

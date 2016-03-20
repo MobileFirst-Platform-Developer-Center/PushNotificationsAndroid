@@ -45,7 +45,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
     private static final String TAG = "MainActivityFragment";
 
-    private BroadcastReceiver loginSuccessReceiver, loginRequiredReceiver;
+    private BroadcastReceiver loginSuccessReceiver, loginRequiredReceiver, loginFailureReceiver;
 
     private Context _this;
 
@@ -107,6 +107,14 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             }
         };
 
+        // Handle challenge broadcast
+        loginFailureReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                showAlertMsg("Error", intent.getStringExtra("errorMsg"));
+            }
+        };
+
     }
 
     @Override
@@ -114,13 +122,14 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         super.onStart();
         LocalBroadcastManager.getInstance(_this).registerReceiver(loginSuccessReceiver, new IntentFilter(Constants.ACTION_LOGIN_SUCCESS));
         LocalBroadcastManager.getInstance(_this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_REQUIRED));
-        LocalBroadcastManager.getInstance(_this).registerReceiver(loginRequiredReceiver, new IntentFilter(Constants.ACTION_LOGIN_FAILURE));
+        LocalBroadcastManager.getInstance(_this).registerReceiver(loginFailureReceiver, new IntentFilter(Constants.ACTION_LOGIN_FAILURE));
     }
 
     @Override
     public void onStop() {
         LocalBroadcastManager.getInstance(_this).unregisterReceiver(loginSuccessReceiver);
         LocalBroadcastManager.getInstance(_this).unregisterReceiver(loginRequiredReceiver);
+        LocalBroadcastManager.getInstance(_this).unregisterReceiver(loginFailureReceiver);
         super.onStop();
     }
 
@@ -187,14 +196,23 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 push.registerDevice(new MFPPushResponseListener<String>() {
                     @Override
                     public void onSuccess(String s) {
-                        enableButtons();
-                        showSnackbar("Registered Successfully");
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                enableButtons();
+                                showSnackbar("Registered Successfully");
+                            }
+                        });
                     }
 
                     @Override
-                    public void onFailure(MFPPushException e) {
-                        showSnackbar("Failed to register device");
-                        Log.d(TAG, "Failed to register device with error: " + e.toString());
+                    public void onFailure(final MFPPushException e) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                showSnackbar("Failed to register device");
+                                Log.d(TAG, "Failed to register device with error: " + e.toString());
+                            }
+                        });
+
                     }
                 });
                 break;

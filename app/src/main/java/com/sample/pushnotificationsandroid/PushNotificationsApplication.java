@@ -37,7 +37,7 @@ public class PushNotificationsApplication extends Application {
         MFPPush.getInstance().initialize(this);
 
         // Initialize challenge handler
-        RememberMeChallengeHandler.createAndRegister();
+        UserLoginChallengeHandler.createAndRegister();
 
         Log.i(TAG, "Push has been initialized in the PushNotificationsApplication.class.");
 
