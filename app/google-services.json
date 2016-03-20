@@ -8,10 +8,10 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:17576166138:android:d2ea90a43a16c243",
-        "client_id": "android:com.ibm.sample.pushnotification",
+        "client_id": "android:com.sample.pushnotificationsandroid",
         "client_type": 1,
         "android_client_info": {
-          "package_name": "com.ibm.sample.pushnotification"
+          "package_name": "com.sample.pushnotificationsandroid"
         }
       },
       "oauth_client": [],
