@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -48,12 +47,6 @@ public class UserLoginChallengeHandler extends WLChallengeHandler {
         super(securityCheckName);
         context = WLClient.getInstance().getContext();
         broadcastManager = LocalBroadcastManager.getInstance(context);
-
-        //Reset the current user
-        SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCES_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(Constants.PREFERENCES_KEY_USER);
-        editor.apply();
 
         //Receive login requests
         broadcastManager.registerReceiver(new BroadcastReceiver() {
@@ -132,15 +125,6 @@ public class UserLoginChallengeHandler extends WLChallengeHandler {
     public void handleSuccess(JSONObject identity) {
         super.handleSuccess(identity);
         isChallenged = false;
-        try {
-            //Save the current user
-            SharedPreferences preferences = context.getSharedPreferences(Constants.PREFERENCES_FILE, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(Constants.PREFERENCES_KEY_USER, identity.getJSONObject("user").toString());
-            editor.apply();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         Intent intent = new Intent();
         intent.setAction(Constants.ACTION_LOGIN_SUCCESS);
