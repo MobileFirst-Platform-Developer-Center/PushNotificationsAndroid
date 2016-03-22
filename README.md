@@ -10,8 +10,10 @@ https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notificatio
 
 1. Import the project to Android Studio.
 2. From a **Command-line** window, navigate to the project's root folder and run the command: `mfpdev app register`.
-3. In the MobileFirst console, under **Applications** → **PushNotificationsAndroid** → **Security** → **Map scope elements to security checks**, add a mapping for `push.mobileclient`.
-4. Run the app by clicking the **Run** button.
+3. In the MobileFirst console:
+	* Under **Applications** → **PushNotificationsAndroid** → **Security** → **Map scope elements to security checks**, add a mapping for `push.mobileclient`.
+	* Under **Applications** → **PushNotificationsAndroid** → **Push** → **Push Settings**, add Google Clout Messaging (GMC) Server API Key and Sender ID.
+5. Run the app by clicking the **Run** button.
 
 **[Sending a notification](https://mobilefirstplatform.ibmcloud.com/tutorials/en/foundation/8.0/notifications/sending-push-notifications):**
 
