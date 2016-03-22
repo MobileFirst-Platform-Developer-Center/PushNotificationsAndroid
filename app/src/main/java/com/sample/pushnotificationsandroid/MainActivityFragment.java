@@ -244,18 +244,22 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.btn_subscribe:
                 if (tags != null && tags.length > 0) {
-                    push.subscribe(tags, new MFPPushResponseListener<String[]>() {
-                        @Override
-                        public void onSuccess(String[] strings) {
-                            showSnackbar("Subscribed successfully");
-                        }
+                    if (!tags[0].equals("Push.ALL")) {
+                        push.subscribe(tags, new MFPPushResponseListener<String[]>() {
+                            @Override
+                            public void onSuccess(String[] strings) {
+                                showSnackbar("Subscribed successfully");
+                            }
 
-                        @Override
-                        public void onFailure(MFPPushException e) {
-                            showSnackbar("Failed to subscribe");
-                            Log.d(TAG, "Failed to subscribe with error: " + e.toString());
-                        }
-                    });
+                            @Override
+                            public void onFailure(MFPPushException e) {
+                                showSnackbar("Failed to subscribe");
+                                Log.d(TAG, "Failed to subscribe with error: " + e.toString());
+                            }
+                        });
+                    } else {
+                        showAlertMsg("Push Notifications", "There are no tags to subscribe to \n\n Try clicking on the \"Get Tags\" button");
+                    }
                 } else {
                     showAlertMsg("Push Notifications", "There are no tags to subscribe to \n\n Try clicking on the \"Get Tags\" button");
                 }
