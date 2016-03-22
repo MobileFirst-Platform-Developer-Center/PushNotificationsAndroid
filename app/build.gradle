@@ -54,15 +54,13 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     compile group: 'com.ibm.mobile.foundation',
             name: 'ibmmobilefirstplatformfoundationpush',
-            version: '8.0.0-Beta1-SNAPSHOT',
+            version: '8.0.+',
             ext: 'aar',
             transitive: true
     compile group: 'com.ibm.mobile.foundation',
             name: 'ibmmobilefirstplatformfoundation',
-            version: '8.0.Beta1-SNAPSHOT',
+            version: '8.0.+',
             ext: 'aar',
             transitive: true
     compile "com.google.android.gms:play-services-gcm:8.4.0"
 }
-
-apply plugin: 'com.google.gms.google-services'
