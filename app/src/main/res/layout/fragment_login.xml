@@ -53,20 +53,33 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/LinearButtons"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/btn_login"
-        android:layout_toRightOf="@id/btn_login"
-        android:text="@string/btn_login"
-        android:layout_below="@id/til_password" />
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/til_password">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/btn_cancel"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_login"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_remaining_attempts_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/LinearButtons"
         android:layout_marginRight="3dp"
         android:text="@string/label_remaining_attempts" />
 
@@ -74,7 +87,7 @@
         android:id="@+id/tv_remaining_attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login"
+        android:layout_below="@id/LinearButtons"
         android:layout_toEndOf="@id/tv_remaining_attempts_label"
         android:layout_toRightOf="@id/tv_remaining_attempts_label" />
 

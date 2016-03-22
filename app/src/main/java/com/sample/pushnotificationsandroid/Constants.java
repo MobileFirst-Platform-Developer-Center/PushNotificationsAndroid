@@ -22,6 +22,7 @@ public class Constants {
     static final String ACTION_LOGIN_SUCCESS = "com.sample.pushnotificationsandroid.broadcast.login.success";
     static final String ACTION_LOGIN_FAILURE = "com.sample.pushnotificationsandroid.broadcast.login.failure";
     static final String ACTION_LOGIN_REQUIRED = "com.sample.pushnotificationsandroid.broadcast.login.required";
+    static final String ACTION_LOGIN_CANCEL = "com.sample.pushnotificationsandroid.broadcast.login.cancel";
 
     static final String ACTION_LOGOUT = "com.sample.pushnotificationsandroid.broadcast.logout";
     static final String ACTION_LOGOUT_SUCCESS = "com.sample.pushnotificationsandroid.broadcast.logout.success";

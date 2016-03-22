@@ -69,6 +69,14 @@ public class UserLoginChallengeHandler extends WLChallengeHandler {
             }
         }, new IntentFilter(Constants.ACTION_LOGOUT));
 
+        //Receive cancel requests
+        broadcastManager.registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                submitFailure(null);
+            }
+        }, new IntentFilter(Constants.ACTION_LOGIN_CANCEL));
+
     }
 
     public static UserLoginChallengeHandler createAndRegister() {

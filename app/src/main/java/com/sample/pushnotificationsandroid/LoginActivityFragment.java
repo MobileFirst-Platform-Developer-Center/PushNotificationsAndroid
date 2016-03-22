@@ -113,6 +113,9 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
         Button loginBtn = (Button) view.findViewById(R.id.btn_login);
         loginBtn.setOnClickListener(this);
 
+        Button cancelBtn = (Button) view.findViewById(R.id.btn_cancel);
+        cancelBtn.setOnClickListener(this);
+
         //Login error receiver
         loginErrorReceiver = new BroadcastReceiver() {
             @Override
@@ -182,6 +185,12 @@ public class LoginActivityFragment extends Fragment implements OnClickListener {
                     intent.putExtra("credentials", credentials.toString());
                     LocalBroadcastManager.getInstance(_this).sendBroadcast(intent);
                 }
+                break;
+            case R.id.btn_cancel:
+                Intent intent = new Intent();
+                intent.setAction(Constants.ACTION_LOGIN_CANCEL);
+                LocalBroadcastManager.getInstance(_this).sendBroadcast(intent);
+                getActivity().finish();
                 break;
             default:
                 Log.d(TAG, "OnClick not handled");
