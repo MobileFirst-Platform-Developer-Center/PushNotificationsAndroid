@@ -205,7 +205,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     }
 
                     @Override
-                    public void onFailure(MFPPushException e) {
+                    public void onFailure(final MFPPushException e) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 showSnackbar("Failed to register device");
