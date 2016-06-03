@@ -193,7 +193,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 }
                 break;
             case R.id.btn_register:
-                push.registerDevice(new MFPPushResponseListener<String>() {
+                push.registerDevice(null, new MFPPushResponseListener<String>() {
                     @Override
                     public void onSuccess(String s) {
                         getActivity().runOnUiThread(new Runnable() {
@@ -212,7 +212,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                                 Log.d(TAG, "Failed to register device with error: " + e.toString());
                             }
                         });
-
                     }
                 });
                 break;
