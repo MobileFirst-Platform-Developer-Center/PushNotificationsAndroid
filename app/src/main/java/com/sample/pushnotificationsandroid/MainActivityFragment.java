@@ -38,6 +38,7 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
+import com.worklight.common.WLAnalytics;
 
 import java.util.List;
 
@@ -68,6 +69,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
 
         _this = getActivity();
+
+        WLAnalytics.init(getActivity().getApplication());
+
 
         // MFPPush is initialized in PushNotificationsApplication.class
         push = MFPPush.getInstance();
@@ -188,6 +192,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             case R.id.btn_push_supported:
                 if (push.isPushSupported()) {
                     showSnackbar("Push is supported");
+                    WLAnalytics.send();
                 } else {
                     showSnackbar("Push is not supported");
                 }
