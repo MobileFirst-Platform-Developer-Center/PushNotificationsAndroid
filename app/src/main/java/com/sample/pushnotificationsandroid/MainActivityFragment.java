@@ -40,6 +40,8 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseLis
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.worklight.common.WLAnalytics;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class MainActivityFragment extends Fragment implements View.OnClickListener, MFPPushNotificationListener {
