@@ -82,16 +82,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         // Option for receiving push notifications
         push.listen(this);
 
-/*
-        // Option for receiving push notification
-        push.listen(new MFPPushNotificationListener() {
-            @Override
-            public void onReceive(MFPSimplePushNotification mfpSimplePushNotification) {
-                showSnackbar(mfpSimplePushNotification.getAlert());
-            }
-        });
-*/
-
         //Handle auto-login success
         loginSuccessReceiver = new BroadcastReceiver() {
             @Override
