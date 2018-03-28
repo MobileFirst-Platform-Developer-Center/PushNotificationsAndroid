@@ -40,6 +40,8 @@ import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseLis
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.worklight.common.WLAnalytics;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class MainActivityFragment extends Fragment implements View.OnClickListener, MFPPushNotificationListener {
@@ -79,16 +81,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         // Option for receiving push notifications
         push.listen(this);
-
-/*
-        // Option for receiving push notification
-        push.listen(new MFPPushNotificationListener() {
-            @Override
-            public void onReceive(MFPSimplePushNotification mfpSimplePushNotification) {
-                showSnackbar(mfpSimplePushNotification.getAlert());
-            }
-        });
-*/
 
         //Handle auto-login success
         loginSuccessReceiver = new BroadcastReceiver() {
@@ -200,7 +192,10 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             case R.id.btn_register:
                 push.registerDevice(null, new MFPPushResponseListener<String>() {
                     @Override
-                    public void onSuccess(String s) {
+                    public void onSuccess(String s) {}
+
+                    @Override
+                    public void onSuccess(JSONObject jobj) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 enableButtons();
@@ -240,6 +235,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     }
 
                     @Override
+                    public void onSuccess(JSONObject jobj) {}
+
+                    @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Error: " + e.getErrorMessage());
                         Log.d(TAG, "Error: " + e + " Doc URL: " + e.getDocUrl() + " Error code: " + e.getErrorCode());
@@ -254,6 +252,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                             public void onSuccess(String[] strings) {
                                 showSnackbar("Subscribed successfully");
                             }
+
+                            @Override
+                            public void onSuccess(JSONObject jobj) {}
 
                             @Override
                             public void onFailure(MFPPushException e) {
@@ -281,6 +282,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     }
 
                     @Override
+                    public void onSuccess(JSONObject jobj) {}
+
+                    @Override
                     public void onFailure(MFPPushException e) {
                         showAlertMsg("Push Notification", e.getErrorMessage());
                         Log.d(TAG, "Failed to subscribe with error: " + e.toString());
@@ -296,6 +300,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     }
 
                     @Override
+                    public void onSuccess(JSONObject jobj) {}
+
+                    @Override
                     public void onFailure(MFPPushException e) {
                         showSnackbar("Failed to unsubscribe");
                         Log.d(TAG, "Failed to unsubscribe with error: " + e.toString());
@@ -309,6 +316,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                         disableButtons();
                         showSnackbar("Unregistered successfully");
                     }
+
+                    @Override
+                    public void onSuccess(JSONObject jobj) {}
 
                     @Override
                     public void onFailure(MFPPushException e) {
