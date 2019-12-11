@@ -21,13 +21,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.sample.pushnotificationsandroid.permission.C2D_MESSAGE"/>
-
-    <!-- GCM Permissions -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <permission
-        android:name="com.sample.pushnotificationsandroid.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
 
     <application
         android:name=".PushNotificationsApplication"
@@ -62,33 +55,19 @@
 
         <!-- MobileFirst UI Activity -->
         <activity android:name="com.worklight.wlclient.ui.UIActivity" />
-
-        <!-- GCM Receiver -->
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.sample.pushnotificationsandroid" />
-            </intent-filter>
-        </receiver>
-
         <!-- MFPPush Intent Service -->
+        <activity android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationHandler" android:theme="@android:style/Theme.NoDisplay" />
         <service
             android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushIntentService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <!-- MFPPush Instance ID Listener Service -->
-        <service
-            android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushInstanceIDListenerService"
-            android:exported="false">
+        <service android:name="com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 

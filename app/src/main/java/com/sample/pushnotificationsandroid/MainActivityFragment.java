@@ -35,13 +35,26 @@ import android.widget.Button;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPush;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushException;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationButton;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationCategory;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushNotificationOptions;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushResponseListener;
 import com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPSimplePushNotification;
 import com.worklight.common.WLAnalytics;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import com.worklight.wlclient.api.WLAuthorizationManager;
+import com.worklight.wlclient.api.WLLogoutResponseListener;
+import com.worklight.wlclient.api.WLResourceRequest;
+import com.worklight.wlclient.api.WLResponse;
+import com.worklight.wlclient.api.WLResponseListener;
+import com.worklight.wlclient.api.WLFailResponse;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityFragment extends Fragment implements View.OnClickListener, MFPPushNotificationListener {
@@ -61,6 +74,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private String[] tags;
 
     private MFPPush push = null;
+    private MFPPushNotificationListener notificationListener;
 
     public MainActivityFragment() {
         // Mandatory empty constructor
@@ -75,12 +89,78 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         WLAnalytics.init(getActivity().getApplication());
 
 
-        // MFPPush is initialized in PushNotificationsApplication.class
+ /*
+ *  Create buttons for interactive category
+  */
+
+        MFPPushNotificationOptions options = new MFPPushNotificationOptions();
+
+        MFPPushNotificationButton firstButton = new MFPPushNotificationButton.Builder("Accept Button")
+                .setIcon("extension_circle")
+                .setLabel("Accept")
+                .build();
+
+        MFPPushNotificationButton secondButton = new MFPPushNotificationButton.Builder("Decline Button")
+                .setIcon("extension_circle")
+                .setLabel("Decline")
+                .build();
+
+        MFPPushNotificationButton secondButton1 = new MFPPushNotificationButton.Builder("Ignore Button")
+                .setIcon("extension_circle")
+                .setLabel("Ignore")
+                .build();
+
+        List<MFPPushNotificationButton> getButtons =  new ArrayList<MFPPushNotificationButton>();
+        getButtons.add(firstButton);
+        getButtons.add(secondButton);
+        getButtons.add(secondButton1);
+
+        List<MFPPushNotificationButton> getButtons1 =  new ArrayList<MFPPushNotificationButton>();
+        getButtons1.add(firstButton);
+        getButtons1.add(secondButton);
+
+        List<MFPPushNotificationButton> getButtons2 =  new ArrayList<MFPPushNotificationButton>();
+        getButtons2.add(firstButton);
+
+        MFPPushNotificationCategory category = new MFPPushNotificationCategory.Builder("Category_Name1").setButtons(getButtons).build();
+        MFPPushNotificationCategory category1 = new MFPPushNotificationCategory.Builder("Category_Name2").setButtons(getButtons1).build();
+        MFPPushNotificationCategory category2 = new MFPPushNotificationCategory.Builder("Category_Name3").setButtons(getButtons2).build();
+
+        List<MFPPushNotificationCategory> categoryList =  new ArrayList<MFPPushNotificationCategory>();
+        categoryList.add(category);
+        categoryList.add(category1);
+        categoryList.add(category2);
+
+
+        options.setInteractiveNotificationCategories(categoryList);
+
         push = MFPPush.getInstance();
+        push.initialize(this.getContext(),options);
 
 
         // Option for receiving push notifications
         push.listen(this);
+
+
+//        notificationListener = new MFPPushNotificationListener() {
+//            @Override
+//            public void onReceive(final MFPSimplePushNotification message) {
+//                Log.i(TAG, "Received a Push Notification: " + message.toString());
+//                runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        new android.app.AlertDialog.Builder(_this)
+//                                .setTitle("Received a Push Notification")
+//                                .setMessage(message.getAlert())
+//                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                    }
+//                                })
+//                                .show();
+//                    }
+//                });
+//            }
+//        };
+
 
         //Handle auto-login success
         loginSuccessReceiver = new BroadcastReceiver() {
@@ -191,6 +271,8 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.btn_register:
                 push.registerDevice(null, new MFPPushResponseListener<String>() {
+
+
                     @Override
                     public void onSuccess(String s) {}
 
@@ -311,9 +393,11 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.btn_unregister:
                 push.unregisterDevice(new MFPPushResponseListener<String>() {
+
                     @Override
                     public void onSuccess(String s) {
                         disableButtons();
+
                         showSnackbar("Unregistered successfully");
                     }
 
@@ -402,15 +486,35 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         getActivity().runOnUiThread(run);
     }
 
-    @Override
-    public void onReceive(MFPSimplePushNotification mfpSimplePushNotification) {
-        Log.i("Push Notifications", mfpSimplePushNotification.getAlert());
 
+
+
+
+    @Override
+    public void onReceive(final MFPSimplePushNotification mfpSimplePushNotification) {
         String alert = "Alert: " + mfpSimplePushNotification.getAlert();
         String alertID = "ID: " + mfpSimplePushNotification.getId();
         String alertPayload = "Payload: " + mfpSimplePushNotification.getPayload();
+        String category = "Category: " +  mfpSimplePushNotification.getCategory();
+        String button = mfpSimplePushNotification.getInteractiveCategory();
+        String action = mfpSimplePushNotification.getActionName();
 
-        // Show the received notification in an AlertDialog
-        showAlertMsg("Push Notifications", alert + "\n" + alertID + "\n" + alertPayload);
+
+            if (action!=null) {
+                if (action.equals("Accept Button")) {
+                    System.out.print("Clicked Accept Action");
+                    showAlertMsg("Push Notifications",  action + "\n" + " pressed");
+                } else if (action.equals("Decline Button")) {
+                    System.out.print("Clicked Decline Action");
+                    showAlertMsg("Push Notifications",  action + "\n" + " pressed");
+                } else if (action.equals("Ignore Button")) {
+                    System.out.print("Clicked Ignore Action");
+                    showAlertMsg("Push Notifications",  action + "\n" + " pressed");
+                }
+
+            }
+
+                showAlertMsg("Push Notifications", alert + "\n" + alertID + "\n" + alertPayload );
+
     }
 }
